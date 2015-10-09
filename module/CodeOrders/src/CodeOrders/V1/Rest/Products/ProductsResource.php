@@ -41,7 +41,9 @@ class ProductsResource extends AbstractResourceListener
     public function delete($id)
     {
         if($this->repository->delete($id)){
-            return true;
+            return [
+                'success' => true
+            ];
         }
         else{
             return new ApiProblem(500, "Erro ao deletar o item: $id");

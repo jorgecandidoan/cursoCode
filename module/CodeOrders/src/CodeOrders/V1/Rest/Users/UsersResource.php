@@ -45,7 +45,9 @@ class UsersResource extends AbstractResourceListener
     {
 
         if($this->usersRepository->delete($id)){
-            return true;
+            return [
+                'success' => true
+            ];
         }
         else{
             return new ApiProblem(500, "Erro ao deletar o item: $id");
