@@ -3,6 +3,8 @@ namespace CodeOrders\V1\Rest\Products;
 
 use Zend\Db\TableGateway\TableGatewayInterface;
 use Zend\Paginator\Adapter\DbTableGateway;
+use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Stdlib\Hydrator\ObjectProperty;
 
 
 class ProductsRepository
@@ -39,8 +41,13 @@ class ProductsRepository
 
     public function create($data){
 
-        $mapper = new ProductsMapper();
-        return $this->tableGateway->insert($mapper->extract($data));
+        $mapper = new ObjectProperty();
+        $data = $mapper->extract($data);
+
+        $this->tableGateway->insert($data);
+        $data['id'] = $this->tableGateway->getLastInsertValue();
+
+        return $data;
 
     }
 

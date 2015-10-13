@@ -5,6 +5,7 @@ use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 class ProductsRepositoryFactory implements FactoryInterface
 {
@@ -12,8 +13,7 @@ class ProductsRepositoryFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $dbAdapter = $serviceLocator->get('DbAdapter');
-        $productsMapper = new ProductsMapper();
-        $hydrator = new HydratingResultSet($productsMapper, new ProductsEntity());
+        $hydrator = new HydratingResultSet(new ClassMethods(), new ProductsEntity());
 
         $tableGateway = new TableGateway('products',$dbAdapter,null,$hydrator);
 

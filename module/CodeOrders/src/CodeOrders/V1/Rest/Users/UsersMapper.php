@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: JORGE
- * Date: 09/10/2015
- * Time: 11:06
- */
-
 namespace CodeOrders\V1\Rest\Users;
 
 use Zend\Stdlib\Hydrator\HydratorInterface;

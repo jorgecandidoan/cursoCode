@@ -8,10 +8,10 @@ class ProductsMapper extends ProductsEntity implements HydratorInterface
     public function extract($object)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'price' => $this->price
+            'id' => $object->id,
+            'name' => $object->name,
+            'description' => $object->description,
+            'price' => $object->price
         ];
     }
 
