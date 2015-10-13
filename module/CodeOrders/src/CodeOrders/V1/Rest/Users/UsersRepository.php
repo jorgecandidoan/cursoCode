@@ -3,6 +3,7 @@ namespace CodeOrders\V1\Rest\Users;
 
 use Zend\Db\TableGateway\TableGatewayInterface;
 use Zend\Paginator\Adapter\DbTableGateway;
+use Zend\Stdlib\Hydrator\ObjectProperty;
 
 class UsersRepository
 {
@@ -38,8 +39,13 @@ class UsersRepository
 
     public function create($data){
 
-        $mapper = new UsersMapper();
-        return $this->tableGateway->insert($mapper->extract($data));
+        $mapper = new ObjectProperty();
+        $data = $mapper->extract($data);
+
+        $this->tableGateway->insert($data);
+        $data['id'] = $this->tableGateway->getLastInsertValue();
+
+        return $data;
 
     }
 
